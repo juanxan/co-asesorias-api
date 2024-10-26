@@ -32,10 +32,10 @@ export class Users extends Model {
   password: string;
 
   @Column({ allowNull: false })
-  user_name: string;
+  document: number;
 
   @Column({ allowNull: false })
-  id_role: number;
+  birthday: Date;
 
   @Default(1)
   @Column({ allowNull: false })
