@@ -4,8 +4,10 @@ import {
   IsEmail,
   IsNumber,
   Matches,
+  IsDateString,
 } from 'class-validator';
 import { PartialType, ApiProperty } from '@nestjs/swagger';
+import { IsDate } from 'sequelize-typescript';
 
 export class CreateUserDto {
   @IsString()
@@ -34,14 +36,20 @@ export class CreateUserDto {
   @ApiProperty({ description: `user's password` })
   readonly password: string;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  @ApiProperty({ description: `user's user_name` })
-  readonly user_name: string;
+  @ApiProperty({ description: `user's document` })
+  readonly document: number;
+
+  @IsDateString()
+  @IsNotEmpty()
+  @ApiProperty({ description: `user's birthday` })
+  readonly birthday: Date;
 
   @IsNumber()
-  @ApiProperty({ description: `user's id_role` })
-  readonly id_role: number;
+  @IsNotEmpty()
+  @ApiProperty({ description: `country_id's document` })
+  readonly country_id: number;
 }
 
 export class UpdateProductDto extends PartialType(CreateUserDto) {}
