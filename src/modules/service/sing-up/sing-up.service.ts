@@ -9,7 +9,7 @@ export class SingUpService {
   constructor(
     @InjectModel(Users)
     private usersModel: typeof Users,
-  ) { }
+  ) {}
   async createUser(data: any): Promise<Response> {
     const salt = await bcrypt.genSalt();
     const password = data.password;
@@ -22,13 +22,11 @@ export class SingUpService {
       email: data.email,
       password: hash,
     };
-    const existingEmail = await this.usersModel.findOne({ where: { email: data.email } });
-    const existingUserName = await this.usersModel.findOne({ where: { user_name: data.user_name } });
+    const existingEmail = await this.usersModel.findOne({
+      where: { email: data.email },
+    });
     if (existingEmail) {
       return new Response(CODES.PKL_USER_EMAIL_EXIST, null);
-    }
-    if (existingUserName) {
-      return new Response(CODES.PKL_USER_NAME_EXIST, null);
     }
     this.usersModel.create(newUser);
     return new Response(CODES.PKL_USER_CREATE_OK, responseData);
