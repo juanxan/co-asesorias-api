@@ -7,7 +7,6 @@ import {
   IsDateString,
 } from 'class-validator';
 import { PartialType, ApiProperty } from '@nestjs/swagger';
-import { IsDate } from 'sequelize-typescript';
 
 export class CreateUserDto {
   @IsString()
