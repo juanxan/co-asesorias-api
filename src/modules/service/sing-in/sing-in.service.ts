@@ -12,19 +12,18 @@ import { Response } from '../../models/response.model';
 export class SingInService {
   constructor(
     @InjectModel(Users)
-    private usersModel: typeof Users,
-    private jwtService: JwtService,
-    private configService: ConfigService,
+    private readonly usersModel: typeof Users,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
   ) {}
 
   generateJWT(user: Users) {
-    const { email, id, name, last_name, id_role, id_status } = user;
+    const { email, id, name, last_name, id_status } = user;
     const payload: PayloadToken = {
       email,
       sub: id,
       name,
       lastName: last_name,
-      role: id_role,
       status: id_status,
     };
     const response: LoginUser = {
@@ -32,7 +31,6 @@ export class SingInService {
       name,
       last_name,
       email,
-      id_role,
       id_status,
     };
     const secret = this.configService.get<string>('jwtSecret');
