@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Users } from './schema.db';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Countries } from './countries.db';
 
 @Module({
   imports: [
@@ -14,9 +15,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get('USER_DATABASE'),
         password: configService.get('PASSWORD_DATABASE'),
         database: configService.get('NAME_DATABASE'),
-        models: [Users],
+        models: [Users, Countries],
         autoLoadModels: true,
-        // synchronize: true,
+        synchronize: true,
       }),
       inject: [ConfigService],
     }),
